@@ -4,11 +4,13 @@
 // See page 312.
 
 // Package storage is part of a hypothetical cloud storage server.
+
 package storage
 
 import (
 	"fmt"
 	"log"
+
 	"net/smtp"
 )
 
@@ -22,8 +24,7 @@ const sender = "notifications@example.com"
 const password = "correcthorsebatterystaple"
 const hostname = "smtp.example.com"
 
-const template = `Warning: you are using %d bytes of storage,
-%d%% of your quota.`
+const template = `Warning: you are using %d bytes of storage, %d%% of your quota.`
 
 //!+factored
 var notifyUser = func(username, msg string) {

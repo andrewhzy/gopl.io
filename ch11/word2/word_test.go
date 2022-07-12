@@ -6,12 +6,11 @@ package word
 import (
 	"fmt"
 	"math/rand"
+	"testing"
 	"time"
 )
 
 //!+bench
-
-import "testing"
 
 //!-bench
 
@@ -46,6 +45,7 @@ func TestIsPalindrome(t *testing.T) {
 
 //!+bench
 func BenchmarkIsPalindrome(b *testing.B) {
+	fmt.Println(b.N)
 	for i := 0; i < b.N; i++ {
 		IsPalindrome("A man, a plan, a canal: Panama")
 	}
