@@ -91,7 +91,6 @@ func Example_array() {
 }
 
 func Example_movie() {
-	//!+movie
 	type Movie struct {
 		Title, Subtitle string
 		Year            int
@@ -100,8 +99,6 @@ func Example_movie() {
 		Oscars          []string
 		Sequel          *string
 	}
-	//!-movie
-	//!+strangelove
 	strangelove := Movie{
 		Title:    "Dr. Strangelove",
 		Subtitle: "How I Learned to Stop Worrying and Love the Bomb",
@@ -123,31 +120,9 @@ func Example_movie() {
 			"Best Picture (Nomin.)",
 		},
 	}
-	//!-strangelove
 	Display("strangelove", strangelove)
+	// Output:
 
-	// We don't use an Output: comment since displaying
-	// a map is nondeterministic.
-	/*
-		//!+output
-		Display strangelove (display.Movie):
-		strangelove.Title = "Dr. Strangelove"
-		strangelove.Subtitle = "How I Learned to Stop Worrying and Love the Bomb"
-		strangelove.Year = 1964
-		strangelove.Color = false
-		strangelove.Actor["Gen. Buck Turgidson"] = "George C. Scott"
-		strangelove.Actor["Brig. Gen. Jack D. Ripper"] = "Sterling Hayden"
-		strangelove.Actor["Maj. T.J. \"King\" Kong"] = "Slim Pickens"
-		strangelove.Actor["Dr. Strangelove"] = "Peter Sellers"
-		strangelove.Actor["Grp. Capt. Lionel Mandrake"] = "Peter Sellers"
-		strangelove.Actor["Pres. Merkin Muffley"] = "Peter Sellers"
-		strangelove.Oscars[0] = "Best Actor (Nomin.)"
-		strangelove.Oscars[1] = "Best Adapted Screenplay (Nomin.)"
-		strangelove.Oscars[2] = "Best Director (Nomin.)"
-		strangelove.Oscars[3] = "Best Picture (Nomin.)"
-		strangelove.Sequel = nil
-		//!-output
-	*/
 }
 
 // This test ensures that the program terminates without crashing.

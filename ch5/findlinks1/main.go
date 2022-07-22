@@ -9,13 +9,23 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"golang.org/x/net/html"
 )
 
 func main() {
-	doc, err := html.Parse(os.Stdin)
+
+	resp, err := http.Get("https://golang.org")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
+		os.Exit(1)
+	}
+
+	doc, err := html.Parse(resp.Body)
+
+	//doc, err := html.Parse(os.Stdin)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
 		os.Exit(1)
@@ -29,15 +39,15 @@ func main() {
 
 //!+visit
 // visit appends to links each link found in n and returns the result.
-func visit(links []string, n *html.Node) []string {
-	if n.Type == html.ElementNode && n.Data == "a" {
-		for _, a := range n.Attr {
+func visit(links []string, node *html.Node) []string {
+	if node.Type == html.ElementNode && node.Data == "a" {
+		for _, a := range node.Attr {
 			if a.Key == "href" {
 				links = append(links, a.Val)
 			}
 		}
 	}
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
+	for c := node.FirstChild; c != nil; c = c.NextSibling {
 		links = visit(links, c)
 	}
 	return links

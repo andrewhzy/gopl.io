@@ -54,11 +54,16 @@ func appendInt(x []int, y int) []int {
 //!+growth
 func main() {
 	var x, y []int
-	for i := 0; i < 10; i++ {
-		y = appendInt(x, i)
-		fmt.Printf("%d  cap=%d\t%v\n", i, cap(y), y)
+	for i := 0; i < 8; i++ {
+		y = appendslice(x, i)
+		fmt.Printf("len=%2d  cap=%2d  %v\n", len(y), cap(y), y)
 		x = y
 	}
+
+	x = x[5:]
+	y = appendslice(x, 9)
+	y = y[:cap(y)]
+	fmt.Printf("len=%2d  cap=%2d  %v\n", len(y), cap(y), y)
 }
 
 //!-growth

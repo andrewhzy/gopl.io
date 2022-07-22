@@ -49,12 +49,10 @@ func equal(x, y reflect.Value, seen map[comparison]bool) bool {
 	// ...numeric cases omitted for brevity...
 
 	//!-
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32,
-		reflect.Int64:
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		return x.Int() == y.Int()
 
-	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32,
-		reflect.Uint64, reflect.Uintptr:
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
 		return x.Uint() == y.Uint()
 
 	case reflect.Float32, reflect.Float64:

@@ -34,9 +34,12 @@ func daysAgo(t time.Time) int {
 //!-daysAgo
 
 //!+exec
-var report = template.Must(template.New("issuelist").
-	Funcs(template.FuncMap{"daysAgo": daysAgo}).
-	Parse(templ))
+var report = template.Must(
+	template.
+		New("issuelist").
+		Funcs(template.FuncMap{"daysAgo": daysAgo}).
+		Parse(templ),
+)
 
 func main() {
 	result, err := github.SearchIssues(os.Args[1:])
@@ -50,23 +53,23 @@ func main() {
 
 //!-exec
 
-func noMust() {
-	//!+parse
-	report, err := template.New("report").
-		Funcs(template.FuncMap{"daysAgo": daysAgo}).
-		Parse(templ)
-	if err != nil {
-		log.Fatal(err)
-	}
-	//!-parse
-	result, err := github.SearchIssues(os.Args[1:])
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err := report.Execute(os.Stdout, result); err != nil {
-		log.Fatal(err)
-	}
-}
+//func noMust() {
+//	//!+parse
+//	report, err := template.New("report").
+//		Funcs(template.FuncMap{"daysAgo": daysAgo}).
+//		Parse(templ)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	//!-parse
+//	result, err := github.SearchIssues(os.Args[1:])
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	if err := report.Execute(os.Stdout, result); err != nil {
+//		log.Fatal(err)
+//	}
+//}
 
 /*
 //!+output

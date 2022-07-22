@@ -9,9 +9,11 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
+
+	"golang.org/x/net/html"
 )
 
 func main() {
@@ -21,13 +23,23 @@ func main() {
 			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
 			os.Exit(1)
 		}
-		b, err := ioutil.ReadAll(resp.Body)
+
+		doc, err := html.Parse(resp.Body)
+		if doc == nil || err != nil {
+			fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
+			os.Exit(1)
+		}
+		_, err = io.Copy(os.Stdout, resp.Body)
+		//time.Sleep(999)
+
+		//b, err := ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
+		os.Stdout.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
 			os.Exit(1)
 		}
-		fmt.Printf("%s", b)
+		//fmt.Printf("%s", b)
 	}
 }
 

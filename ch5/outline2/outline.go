@@ -34,6 +34,7 @@ func outline(url string) error {
 
 	//!+call
 	forEachNode(doc, startElement, endElement)
+	//forEachNode(doc, nil, nil)
 	//!-call
 
 	return nil
@@ -65,7 +66,7 @@ var depth int
 
 func startElement(n *html.Node) {
 	if n.Type == html.ElementNode {
-		fmt.Printf("%*s<%s>\n", depth*2, "", n.Data)
+		fmt.Printf("%*s<%*s>\n", depth*2, "", 0, n.Data)
 		depth++
 	}
 }

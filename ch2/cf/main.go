@@ -22,10 +22,10 @@ func main() {
 			fmt.Fprintf(os.Stderr, "cf: %v\n", err)
 			os.Exit(1)
 		}
-		f := tempconv.Fahrenheit(t)
-		c := tempconv.Celsius(t)
-		fmt.Printf("%s = %s, %s = %s\n",
-			f, tempconv.FToC(f), c, tempconv.CToF(c))
+		f := tempconv111.Fahrenheit(t)
+		c := tempconv111.FToC(f)
+		k := tempconv111.CToK(c)
+		fmt.Printf("%10s = %25s = %25s\n", f, c, k)
 	}
 }
 

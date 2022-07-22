@@ -14,12 +14,15 @@ import (
 )
 
 var n = flag.Bool("n", false, "omit trailing newline")
+var m = flag.Int("m", 0, "test")
 var sep = flag.String("s", " ", "separator")
 
 func main() {
 	flag.Parse()
-	fmt.Print(strings.Join(flag.Args(), *sep))
-	if !*n {
+	a := *sep
+	b := *n
+	fmt.Print(strings.Join(flag.Args(), a))
+	if !b && *m > 0 {
 		fmt.Println()
 	}
 }
