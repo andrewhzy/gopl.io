@@ -2,6 +2,7 @@ package ch4
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 	"unsafe"
 )
@@ -19,7 +20,7 @@ func Test0(t *testing.T) {
 }
 
 func square(n int) int     { return n * n }
-func negative(n int) int   { return n }
+func negative(n int) int   { return -n }
 func product(m, n int) int { return m * n }
 func Test1(t *testing.T) {
 	f := square
@@ -36,27 +37,73 @@ func Test2(t *testing.T) {
 }
 
 func Test3(t *testing.T) {
-
+	add1 := func(r rune) rune { return r + 1 }
+	fmt.Println(strings.Map(add1, "HAL-9000"))
+	// "IBM.:111"
+	fmt.Println(strings.Map(add1, "VMS"))   // "WNT"
+	fmt.Println(strings.Map(add1, "Admix")) // "Benjy"
 }
 
 func Test4(t *testing.T) {
+	nums := make([]int, 8)
+	for i := range nums {
+		nums[i] = i
+	}
+	var fns []func()
+	for i := 0; i < len(nums); i++ {
+		//fmt.Println(nums[i])
 
+		n := nums[i]
+		fns = append(fns, func() {
+			fmt.Println(n)
+		})
+	}
+	for _, f := range fns {
+		f()
+	}
 }
 
 func Test5(t *testing.T) {
 
+	nums := make(map[int]int, 8)
+	for i := 0; i < 8; i++ {
+		nums[i] = i
+	}
+	var fns []func()
+	for i := 0; i < 8; i++ {
+		fmt.Println(nums[i])
+
+		n := nums[i]
+		fns = append(fns, func() {
+			fmt.Println(n)
+		})
+	}
+	for _, f := range fns {
+		f()
+	}
 }
 
+func f(...int) {}
+func g([]int)  {}
 func Test6(t *testing.T) {
-
+	fmt.Printf("%T\n", f) // "func(...int)"
+	fmt.Printf("%T\n", g) // "func([]int)"
 }
 
+func double(x int) (result int) {
+	defer func() { fmt.Printf("double(%d) = %d\n", x, result) }()
+	return x + x
+}
 func Test7(t *testing.T) {
-
+	fmt.Println(double(9))
 }
 
+func triple(x int) (result int) {
+	defer func() { result += x }()
+	return double(x)
+}
 func Test8(t *testing.T) {
-
+	fmt.Println(triple(4))
 }
 
 func Test9(t *testing.T) {

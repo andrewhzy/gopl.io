@@ -66,7 +66,7 @@ var depth int
 
 func startElement(n *html.Node) {
 	if n.Type == html.ElementNode {
-		fmt.Printf("%*s<%*s>\n", depth*2, "", 0, n.Data)
+		fmt.Printf("%*s<%*s>%d\n", depth*4, "    ", depth*4, "jfsdlkjflsdkjflskdjflsjdlf", depth*4)
 		depth++
 	}
 }
@@ -74,7 +74,7 @@ func startElement(n *html.Node) {
 func endElement(n *html.Node) {
 	if n.Type == html.ElementNode {
 		depth--
-		fmt.Printf("%*s</%s>\n", depth*2, "", n.Data)
+		fmt.Printf("%*s</%s>\n", depth*4, "", n.Data)
 	}
 }
 

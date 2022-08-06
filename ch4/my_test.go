@@ -35,19 +35,27 @@ func Test2(t *testing.T) {
 }
 
 func Test3(t *testing.T) {
-	var ip []int
-	ip = nil
-	fmt.Println(len(ip))
-	fmt.Println(cap(ip))
-	fmt.Println(unsafe.Sizeof(ip))
-	ip = []int{}
-	fmt.Println(len(ip))
-	fmt.Println(cap(ip))
-	fmt.Println(unsafe.Sizeof(ip))
-	ip = make([]int, 3)[1:1]
-	fmt.Println(len(ip))
-	fmt.Println(cap(ip))
-	fmt.Println(unsafe.Sizeof(ip))
+	var ints []int
+	ints = nil
+	fmt.Println(len(ints))
+	fmt.Println(cap(ints))
+	fmt.Println(unsafe.Sizeof(ints))
+	ints = []int{}
+	fmt.Println(len(ints))
+	fmt.Println(cap(ints))
+	fmt.Println(unsafe.Sizeof(ints))
+	ints = make([]int, 3)[1:1]
+	fmt.Println(len(ints))
+	fmt.Println(cap(ints))
+	fmt.Println(unsafe.Sizeof(ints))
+
+	var intsp *[]int
+	intsp = new([]int)
+	fmt.Println(len(*intsp))
+	fmt.Println(cap(*intsp))
+	fmt.Println(unsafe.Sizeof(intsp))
+	fmt.Println(unsafe.Sizeof(*intsp))
+
 }
 
 func Test4(t *testing.T) {
